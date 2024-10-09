@@ -54,6 +54,9 @@ functions:
           path: todos
           cors: true
           authorizer: Auth
+          request:
+            schemas:
+              application/json: ${file(src/models/create-todo-request.json)}
     iamRoleStatementsName: todo-app-create-todo-role-${self:provider.stage}
     iamRoleStatements:
       - Effect: Allow
@@ -75,6 +78,10 @@ functions:
           path: todos/{todoId}
           cors: true
           authorizer: Auth
+          request:
+            # Schema that will be used to validate incoming requests
+            schemas:
+              application/json: ${file(src/models/update-todo-request.json)}
     iamRoleStatementsName: todo-app-update-todo-role-${self:provider.stage}
     iamRoleStatements:
       - Effect: Allow
